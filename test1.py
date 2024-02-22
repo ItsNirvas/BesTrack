@@ -1,3 +1,7 @@
+################################################################
+##### THIS IS THE BEST PROGRAMMER'S BRANCH, QUIT IT BITCH ######
+################################################################
+
 import mediapipe as mp 
 import cv2
 import numpy as np
