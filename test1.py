@@ -21,7 +21,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         results = pose.process(image)
 
         image.flags.writeable = True
-        image = cv2.cvtColor(frame, cv2.COLOR_RBG2BGR)
+        image = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
 
 
         cv2.imshow('Pose Model FRAME Detector', frame)
