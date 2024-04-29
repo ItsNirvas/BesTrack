@@ -1,3 +1,6 @@
+# NECESSARY COMMAND BELOW TO HANDKE THE IMPORTS
+# pip install mediapipe opencv-python
+
 import cv2
 import mediapipe as mp
 import numpy as np
