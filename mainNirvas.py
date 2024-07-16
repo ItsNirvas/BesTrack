@@ -84,7 +84,3 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5, sta
 
     cap.release()
     cv2.destroyAllWindows()
-
-########################################################################
-# THIS IS A FUCKING COMMENT
-########################################################################
