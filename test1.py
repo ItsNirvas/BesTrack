@@ -9,14 +9,18 @@ import time
 import cv2
 import mediapipe as mp
 import numpy as np
+
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
 cap = cv2.VideoCapture(0)
+
 ## Setup mediapipe instance
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5, static_image_mode=False) as pose:
     while cap.isOpened():
         ret, frame = cap.read()
+        if not ret:
+            continue
 
         # Obtains the frame size to further use
         frame_width = frame.shape[1]
@@ -36,7 +40,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5, sta
         # Extract landmarks and print them on terminal
         try:
             landmarks = results.pose_landmarks.landmark
-            # RIGHT HAND
+            # General Facial Points
             nose_x = int(results.pose_landmarks.landmark[mp_pose.PoseLandmark.NOSE].x * frame_width)
             nose_y = int(results.pose_landmarks.landmark[mp_pose.PoseLandmark.NOSE].y * frame_height)
             rightEye_x = int(results.pose_landmarks.landmark[mp_pose.PoseLandmark.RIGHT_EYE].x * frame_width)
@@ -54,14 +58,24 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5, sta
             print("Mouth Left Coords: ", mouthLeft_x, ",", mouthLeft_y)
             print("---------- TIME ----------")
             print(" ")
+            
+            # Definitions for dots and lines (correct and wrong)
+            nose_spec1 = mp_drawing.DrawingSpec(color=(0, 0, 0), thickness=2, circle_radius=2)
+            nose_spec2 = mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2)
+            nose_spec3 = mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2)
+            
+            # Verify nose position and set to draw color lines
+            if nose_x >= 325:
+                nose_specs = (nose_spec1, nose_spec2)
+            else:
+                nose_specs = (nose_spec1, nose_spec3)
+
+            # Render detections and define styles of landmarks
+            mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
+                                      landmark_drawing_spec=nose_specs[0],
+                                      connection_drawing_spec=nose_specs[1])
         except:
             pass
-        
-        # Render detections and define styles of landmarks
-        mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
-                                  mp_drawing.DrawingSpec(color=(0,0,0), thickness=2, circle_radius=2), 
-                                  mp_drawing.DrawingSpec(color=(0,255,0), thickness=2, circle_radius=2) 
-                                 )
         
         cv2.imshow('Mediapipe Feed', image)
 
@@ -70,3 +84,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5, sta
 
     cap.release()
     cv2.destroyAllWindows()
+
+########################################################################
+# THIS IS A FUCKING COMMENT
+########################################################################
