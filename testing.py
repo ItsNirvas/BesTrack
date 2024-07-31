@@ -10,7 +10,7 @@ pose = mp_pose.Pose()
 mp_drawing = mp.solutions.drawing_utils
 
 # Especifique o caminho completo do seu vídeo
-video_path = 'C:/Users/vinic/Desktop/TCC/Video Exercises to train AI/Stiff/Videos/romanian deadlift_1.mov'
+video_path = 'C:/Users/vinic/Desktop/TCC/Video Exercises to train AI/Lateral Raise/Videos/lateral raise_1.mov'
 
 # Abre o vídeo
 cap = cv2.VideoCapture(video_path)
@@ -72,5 +72,6 @@ cv2.destroyAllWindows()
 # Cria o DataFrame com os dados e colunas
 df = pd.DataFrame(data, columns=columns)
 
-# Salva o DataFrame como CSV
+# Salva o DataFrame como CSV 
+# ---- NOME DO ARQUIVO EXCEL ----
 df.to_csv('pose_landmarks_data.csv', index=False)
