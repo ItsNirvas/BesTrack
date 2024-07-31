@@ -10,7 +10,7 @@ pose = mp_pose.Pose()
 mp_drawing = mp.solutions.drawing_utils
 
 # Especifique o caminho completo do seu vídeo
-video_path = 'C:/Users/Vinicius/Desktop/TCC/romanian deadlift_1.mov'
+video_path = 'C:/Users/vinic/Desktop/TCC/Video Exercises to train AI/Stiff/Videos/romanian deadlift_1.mov'
 
 # Abre o vídeo
 cap = cv2.VideoCapture(video_path)
