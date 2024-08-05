@@ -4,6 +4,7 @@
 
 # NECESSARY COMMAND BELOW TO HANDLE THE IMPORTS
 # pip install mediapipe opencv-python
+# pip install pandas
 
 import time
 import cv2
