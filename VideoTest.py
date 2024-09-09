@@ -10,7 +10,7 @@ pose = mp_pose.Pose()
 mp_drawing = mp.solutions.drawing_utils
 
 # Especifique o caminho completo do seu vídeo
-video_path = 'C:/Users/vinic/Desktop/TCC/BesTrack/wrong .mov'
+video_path = 'C:/Users/isabe/OneDrive/Documentos/GitHub/BesTrack/diff.mov'
 
 # Abre o vídeo
 cap = cv2.VideoCapture(video_path)
@@ -23,6 +23,10 @@ if not cap.isOpened():
 # Verifica as dimensões do vídeo
 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+# Cria uma janela redimensionável.
+cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
+cv2.resizeWindow('Video', frame_width, frame_height)
 
 # Define os nomes das colunas para cada landmark
 columns = []
