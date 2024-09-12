@@ -1,10 +1,3 @@
-################################################################
-##### THIS IS THE BEST PROGRAMMER'S BRANCH, QUIT IT BITCH ######
-################################################################
-
-# NECESSARY COMMAND BELOW TO HANDLE THE IMPORTS
-# pip install mediapipe opencv-python
-
 import cv2
 import mediapipe as mp
 import numpy as np
