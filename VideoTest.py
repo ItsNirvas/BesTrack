@@ -63,6 +63,9 @@ while cap.isOpened():
 
     # Extract landmarks and print them on terminal
         try:
+
+            #region attribuition of landmarks to vars
+
             landmarks = results.pose_landmarks.landmark
             # Giving to vars important body coordinates
             nose_x = int(results.pose_landmarks.landmark[mp_pose.PoseLandmark.NOSE].x * frame_width)
@@ -151,6 +154,8 @@ while cap.isOpened():
             #print("Right Foot Index", rightFootIndex_x, ",", rightFootIndex_y)
             #print("---------- END ----------")
             #print(" ")
+
+            #endregion
             
             # Definitions for dots and lines (correct and wrong)
             nose_spec1 = mp_drawing.DrawingSpec(color=(0, 0, 0), thickness=2, circle_radius=2)
