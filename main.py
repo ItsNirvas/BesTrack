@@ -28,6 +28,16 @@ def listar_cameras():
 # Função para iniciar a captura de vídeo com a câmera selecionada
 def iniciar_camera():
     camera_index = camera_var.get()
+    max_diff = 30  # Valor padrão
+
+    # Tentar obter o valor da textbox
+    try:
+        input_value = int(range_entry.get())
+        if input_value > 0:
+            max_diff = input_value
+    except ValueError:
+        pass  # Se não for um número válido, mantém o padrão
+
     if camera_index:
         camera_index = int(camera_index.split()[-1])
         cap = cv2.VideoCapture(camera_index)
@@ -66,7 +76,6 @@ def iniciar_camera():
                     rightHip_x = int(landmarks[mp_pose.PoseLandmark.RIGHT_HIP].x * frame_width)
 
                     # Definindo estilos de pontos e linhas para correção
-                    max_diff = 30
                     if abs(leftShoulder_x - leftHip_x) <= max_diff and abs(rightShoulder_x - rightHip_x) <= max_diff:
                         specs = (mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2),
                                  mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2))
@@ -94,7 +103,7 @@ def iniciar_camera():
 
 # Configurando a interface gráfica com customtkinter
 app = ctk.CTk()
-app.geometry("400x200")
+app.geometry("500x400")
 app.title("Seleção de Câmera")
 
 # Variável para armazenar a câmera selecionada
@@ -109,6 +118,19 @@ camera_label.pack(pady=10)
 
 camera_dropdown = ctk.CTkOptionMenu(app, variable=camera_var, values=cameras_disponiveis)
 camera_dropdown.pack(pady=10)
+
+# Label e TextBox para calibrador de range
+range_label = ctk.CTkLabel(app, text="Calibrador do intervalo de margem de erro da AI:")
+range_label.pack(pady=10)
+
+range_entry = ctk.CTkEntry(app, placeholder_text="Insira um número entre 25 e 50", width=250)
+range_entry.pack(pady=10)
+
+# Texto explicativo
+explanation_text = ("Se nenhum valor for inserido, por padrão será 30. "
+                    "A utilização de um valor não calibrado pode resultar num software ineficaz e causar lesões.")
+explanation_label = ctk.CTkLabel(app, text=explanation_text, wraplength=350, justify='center', text_color="gray")
+explanation_label.pack(pady=10)
 
 # Botão para iniciar a câmera selecionada
 start_button = ctk.CTkButton(app, text="Iniciar Câmera", command=iniciar_camera)
