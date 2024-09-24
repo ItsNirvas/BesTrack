@@ -39,8 +39,8 @@ def iniciar_camera():
             max_diff = input_value
     except ValueError:
         pass  # Se não for um número válido, mantém o padrão
-    
-    if arr.size <= 0:
+
+    if len(arr) <= 0:
         messagebox.showwarning("Erro", "Nenhuma camera foi encontrada")
     elif camera_index:
         camera_index = int(camera_index.split()[-1])
