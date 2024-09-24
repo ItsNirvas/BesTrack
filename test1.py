@@ -10,10 +10,12 @@ from tkinter import messagebox
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
+arr = []
+
 # Função para listar câmeras disponíveis
 def listar_cameras():
     index = 0
-    arr = []
+    
     while True:
         cap = cv2.VideoCapture(index)
         if not cap.isOpened():
@@ -37,8 +39,10 @@ def iniciar_camera():
             max_diff = input_value
     except ValueError:
         pass  # Se não for um número válido, mantém o padrão
-
-    if camera_index:
+    
+    if arr.size <= 0:
+        messagebox.showwarning("Erro", "Nenhuma camera foi encontrada")
+    elif camera_index:
         camera_index = int(camera_index.split()[-1])
         cap = cv2.VideoCapture(camera_index)
         if not cap.isOpened():
